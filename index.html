@@ -36,30 +36,6 @@
       filter: grayscale(0%);
     }
 
-    /* Header */
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      padding: 20px;
-      text-align: center;
-      z-index: 1000;
-      background: rgba(0, 0, 0, 0.8);
-    }
-
-    header h1 {
-      font-size: 2.5rem;
-      font-weight: bold;
-      color: #fff;
-      cursor: pointer;
-      transition: color 0.5s ease;
-    }
-
-    header h1:hover {
-      color: #ff6347; /* Vibrant orange */
-    }
-
     /* Hero Section */
     .hero {
       height: 100vh;
@@ -76,140 +52,104 @@
       filter: grayscale(0%);
     }
 
-    .hero h2 {
-      font-size: 3rem;
-      background: rgba(0, 0, 0, 0.5);
-      padding: 20px 40px;
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: bold;
       color: #fff;
+      cursor: pointer;
       transition: color 0.5s ease;
     }
 
-    .hero:hover h2 {
+    .hero h1:hover {
       color: #ff6347; /* Vibrant orange */
     }
 
-    /* Navigation */
-    nav {
+    /* Hidden Navigation */
+    .hidden-nav {
       position: fixed;
       top: 50%;
-      right: 20px;
-      transform: translateY(-50%);
+      left: 50%;
+      transform: translate(-50%, -50%);
       z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.5s ease;
     }
 
-    nav a {
+    .hidden-nav a {
       display: block;
       margin: 20px 0;
-      font-size: 1.1rem;
+      font-size: 1.5rem;
       color: #fff;
       opacity: 0.5;
       transition: opacity 0.5s ease, color 0.5s ease;
     }
 
-    nav a:hover {
+    .hidden-nav a:hover {
       opacity: 1;
       color: #ff6347; /* Vibrant orange */
     }
 
-    /* Sections */
-    .section {
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 20px;
-      background: #000;
-      filter: grayscale(100%);
-      transition: filter 0.5s ease;
+    /* Reveal on Hover */
+    .reveal {
+      opacity: 0;
+      transition: opacity 0.5s ease;
     }
 
-    .section:hover {
-      filter: grayscale(0%);
-    }
-
-    .section h2 {
-      font-size: 2.5rem;
-      color: #fff;
-      transition: color 0.5s ease;
-    }
-
-    .section:hover h2 {
-      color: #ff6347; /* Vibrant orange */
+    .reveal:hover {
+      opacity: 1;
     }
 
     /* Footer */
     footer {
-      background: #000;
-      color: #fff;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
       text-align: center;
-      padding: 20px 0;
-      margin-top: 60px;
+      opacity: 0.5;
+      transition: opacity 0.5s ease;
+    }
+
+    footer:hover {
+      opacity: 1;
     }
 
     footer p {
       margin: 0;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .hero h2 {
-        font-size: 2rem;
-      }
-
-      nav {
-        top: 20px;
-        right: 10px;
-      }
-
-      nav a {
-        margin: 10px 0;
-      }
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
-  <!-- Header -->
-  <header class="monochrome">
-    <h1>PIGPEN</h1>
-  </header>
-
   <!-- Hero Section -->
   <section class="hero monochrome">
-    <h2>What Lies Beyond the Dust?</h2>
+    <h1>PIGPEN</h1>
   </section>
 
-  <!-- Navigation -->
-  <nav class="monochrome">
-    <a href="#about">About</a>
-    <a href="#portfolio">Portfolio</a>
-    <a href="#services">Services</a>
-    <a href="#contact">Contact</a>
-  </nav>
-
-  <!-- About Section -->
-  <section id="about" class="section monochrome">
-    <h2>About Us</h2>
-  </section>
-
-  <!-- Portfolio Section -->
-  <section id="portfolio" class="section monochrome">
-    <h2>Portfolio</h2>
-  </section>
-
-  <!-- Services Section -->
-  <section id="services" class="section monochrome">
-    <h2>Our Services</h2>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="section monochrome">
-    <h2>Contact Us</h2>
-  </section>
+  <!-- Hidden Navigation -->
+  <div class="hidden-nav reveal">
+    <a href="#">Enter</a>
+    <a href="#">Explore</a>
+    <a href="#">Discover</a>
+  </div>
 
   <!-- Footer -->
   <footer class="monochrome">
-    <p>&copy; 2025 PIGPEN. All rights reserved.</p>
+    <p>What lies beyond the dust?</p>
   </footer>
+
+  <script>
+    // JavaScript to reveal hidden navigation on hover
+    const hero = document.querySelector('.hero');
+    const hiddenNav = document.querySelector('.hidden-nav');
+
+    hero.addEventListener('mouseenter', () => {
+      hiddenNav.style.opacity = '1';
+    });
+
+    hero.addEventListener('mouseleave', () => {
+      hiddenNav.style.opacity = '0';
+    });
+  </script>
 </body>
 </html>
