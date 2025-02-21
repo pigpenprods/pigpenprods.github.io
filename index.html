@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Film Production Company</title>
+  <title>Pigpen Creative</title>
   <style>
     /* General Styles */
     body {
@@ -11,8 +11,8 @@
       margin: 0;
       padding: 0;
       line-height: 1.6;
-      color: #333;
-      background-color: #f4f4f4;
+      color: #fff;
+      background-color: #000;
     }
 
     h1, h2, h3 {
@@ -22,19 +22,22 @@
 
     a {
       text-decoration: none;
-      color: #333;
+      color: #fff;
     }
 
     /* Header */
     header {
-      background: #000;
-      color: #fff;
+      background: rgba(0, 0, 0, 0.8);
       padding: 20px 0;
       text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
 
     header h1 {
       font-size: 2.5rem;
+      font-weight: bold;
     }
 
     nav {
@@ -54,35 +57,34 @@
     /* Hero Section */
     .hero {
       background: url('https://via.placeholder.com/1500x800') no-repeat center center/cover;
-      height: 400px;
+      height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
       text-align: center;
     }
 
     .hero h2 {
       font-size: 3rem;
       background: rgba(0, 0, 0, 0.5);
-      padding: 10px 20px;
+      padding: 20px 40px;
     }
 
     /* Sections */
     .container {
       width: 80%;
-      margin: 20px auto;
+      margin: 40px auto;
       padding: 20px;
-      background: #fff;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background: rgba(0, 0, 0, 0.8);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
     }
 
     .about, .portfolio, .services, .contact {
-      margin-bottom: 40px;
+      margin-bottom: 60px;
     }
 
     .about h2, .portfolio h2, .services h2, .contact h2 {
-      font-size: 2rem;
+      font-size: 2.5rem;
       margin-bottom: 20px;
       color: #ff6347;
     }
@@ -94,7 +96,7 @@
     }
 
     .portfolio-item {
-      background: #000;
+      background: #111;
       color: #fff;
       text-align: center;
       padding: 20px;
@@ -112,9 +114,9 @@
     }
 
     .services ul li {
-      background: #f4f4f4;
+      background: #111;
       margin: 10px 0;
-      padding: 10px;
+      padding: 15px;
       border-left: 5px solid #ff6347;
     }
 
@@ -128,6 +130,8 @@
       padding: 10px;
       border: 1px solid #ccc;
       border-radius: 5px;
+      background: #111;
+      color: #fff;
     }
 
     .contact button {
@@ -149,7 +153,7 @@
       color: #fff;
       text-align: center;
       padding: 20px 0;
-      margin-top: 40px;
+      margin-top: 60px;
     }
 
     footer p {
@@ -171,7 +175,7 @@
 <body>
   <!-- Header -->
   <header>
-    <h1>Film Production Co.</h1>
+    <h1>Pigpen Creative</h1>
     <nav>
       <a href="#about">About</a>
       <a href="#portfolio">Portfolio</a>
@@ -188,7 +192,7 @@
   <!-- About Section -->
   <section id="about" class="about container">
     <h2>About Us</h2>
-    <p>We are a passionate team of filmmakers dedicated to creating compelling stories that resonate with audiences worldwide. With years of experience in the industry, we specialize in pre-production, production, and post-production services.</p>
+    <p>We are a passionate team of creatives dedicated to helping brands tell their stories. With years of experience in branding, design, and storytelling, we bring ideas to life in ways that resonate with audiences worldwide.</p>
   </section>
 
   <!-- Portfolio Section -->
@@ -214,9 +218,9 @@
   <section id="services" class="services container">
     <h2>Our Services</h2>
     <ul>
-      <li>Pre-Production: Scriptwriting, Storyboarding, Casting</li>
-      <li>Production: Filming, Directing, Cinematography</li>
-      <li>Post-Production: Editing, Sound Design, Visual Effects</li>
+      <li>Branding: Crafting unique identities for your brand.</li>
+      <li>Design: Creating visually stunning designs.</li>
+      <li>Storytelling: Telling stories that connect with your audience.</li>
     </ul>
   </section>
 
@@ -233,7 +237,7 @@
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2023 Film Production Co. | All Rights Reserved</p>
+    <p>&copy; 2023 Pigpen Creative. All rights reserved.</p>
   </footer>
 </body>
 </html>
