@@ -17,22 +17,33 @@
       cursor: none;
     }
 
-    /* Torch Effect */
-    .torch {
+    /* Mask Container */
+    .mask-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Mask Layer */
+    .mask-layer {
       position: absolute;
-      width: 400px; /* Larger torchlight */
-      height: 400px; /* Larger torchlight */
-      background: radial-gradient(
-        circle,
-        rgba(255, 255, 255, 0.3) 0%, /* Bright center */
-        rgba(255, 255, 255, 0.1) 30%, /* Soft transition */
-        rgba(0, 0, 0, 0) 70% /* Fade to darkness */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.95); /* Semi-transparent black */
+      mask: radial-gradient(
+        circle at center,
+        transparent 100px, /* Cutout size */
+        black 100px
       );
-      border-radius: 50%;
+      -webkit-mask: radial-gradient(
+        circle at center,
+        transparent 100px, /* Cutout size */
+        black 100px
+      );
       pointer-events: none;
-      transform: translate(-50%, -50%);
-      z-index: 1000;
-      box-shadow: 0 0 150px 80px rgba(255, 255, 255, 0.15); /* Softer, larger glow */
     }
 
     /* Hidden Logo */
@@ -40,27 +51,25 @@
       position: absolute;
       width: 150px; /* Adjust size as needed */
       height: auto;
-      opacity: 0;
-      transition: opacity 0.3s ease;
+      opacity: 1; /* Always visible, but masked */
       cursor: pointer;
       filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8)); /* Glow effect */
-    }
-
-    .hidden-logo:hover {
-      opacity: 1 !important;
     }
   </style>
 </head>
 <body>
-  <!-- Torch Effect -->
-  <div class="torch" id="torch"></div>
+  <!-- Mask Container -->
+  <div class="mask-container">
+    <!-- Mask Layer -->
+    <div class="mask-layer" id="mask-layer"></div>
 
-  <!-- Hidden Logo -->
-  <img src="pigpen-logo.png" alt="PIGPEN Logo" class="hidden-logo" id="hidden-logo">
+    <!-- Hidden Logo -->
+    <img src="pigpen-logo.png" alt="PIGPEN Logo" class="hidden-logo" id="hidden-logo">
+  </div>
 
   <script>
     // Get elements
-    const torch = document.getElementById('torch');
+    const maskLayer = document.getElementById('mask-layer');
     const hiddenLogo = document.getElementById('hidden-logo');
 
     // Randomize hidden logo position
@@ -77,26 +86,22 @@
       hiddenLogo.style.top = `${randomY}px`;
     };
 
-    // Move torch with mouse
+    // Move mask with mouse
     document.addEventListener('mousemove', (e) => {
-      torch.style.left = `${e.pageX}px`;
-      torch.style.top = `${e.pageY}px`;
-
-      // Check if mouse is near hidden logo
-      const logoRect = hiddenLogo.getBoundingClientRect();
       const mouseX = e.clientX;
       const mouseY = e.clientY;
 
-      if (
-        mouseX > logoRect.left - 100 && /* Larger detection area */
-        mouseX < logoRect.right + 100 && /* Larger detection area */
-        mouseY > logoRect.top - 100 && /* Larger detection area */
-        mouseY < logoRect.bottom + 100 /* Larger detection area */
-      ) {
-        hiddenLogo.style.opacity = '1';
-      } else {
-        hiddenLogo.style.opacity = '0';
-      }
+      // Update mask position
+      maskLayer.style.mask = `radial-gradient(
+        circle at ${mouseX}px ${mouseY}px,
+        transparent 100px,
+        black 100px
+      )`;
+      maskLayer.style.webkitMask = `radial-gradient(
+        circle at ${mouseX}px ${mouseY}px,
+        transparent 100px,
+        black 100px
+      )`;
     });
 
     // Randomize logo position on load
