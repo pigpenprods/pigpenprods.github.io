@@ -20,63 +20,60 @@
     /* Torch Effect */
     .torch {
       position: absolute;
-      width: 200px;
-      height: 200px;
+      width: 400px; /* Larger torchlight */
+      height: 400px; /* Larger torchlight */
       background: radial-gradient(
         circle,
         rgba(255, 255, 255, 0.2) 10%,
-        rgba(0, 0, 0, 0.9) 70%
+        rgba(0, 0, 0, 0.9) 60% /* Softer gradient for larger bleed */
       );
       border-radius: 50%;
       pointer-events: none;
       transform: translate(-50%, -50%);
       z-index: 1000;
-      box-shadow: 0 0 50px 20px rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 100px 50px rgba(255, 255, 255, 0.2); /* Larger glow */
     }
 
-    /* Hidden Text */
-    .hidden-text {
+    /* Hidden Logo */
+    .hidden-logo {
       position: absolute;
-      font-size: 3rem; /* Bigger text */
-      font-family: 'Cinzel', serif; /* Custom font */
-      color: #fff;
+      width: 150px; /* Adjust size as needed */
+      height: auto;
       opacity: 0;
       transition: opacity 0.3s ease;
       cursor: pointer;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Glow effect */
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8)); /* Glow effect */
     }
 
-    .hidden-text:hover {
+    .hidden-logo:hover {
       opacity: 1 !important;
     }
   </style>
-  <!-- Google Fonts for Custom Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <!-- Torch Effect -->
   <div class="torch" id="torch"></div>
 
-  <!-- Hidden Text -->
-  <div class="hidden-text" id="hidden-text">Enter the Pen</div>
+  <!-- Hidden Logo -->
+  <img src="pigpen-logo.png" alt="PIGPEN Logo" class="hidden-logo" id="hidden-logo">
 
   <script>
     // Get elements
     const torch = document.getElementById('torch');
-    const hiddenText = document.getElementById('hidden-text');
+    const hiddenLogo = document.getElementById('hidden-logo');
 
-    // Randomize hidden text position
-    const randomizeTextPosition = () => {
+    // Randomize hidden logo position
+    const randomizeLogoPosition = () => {
       const windowWidth = window.innerWidth;
       const windowHeight = window.innerHeight;
-      const textWidth = hiddenText.offsetWidth;
-      const textHeight = hiddenText.offsetHeight;
+      const logoWidth = hiddenLogo.offsetWidth;
+      const logoHeight = hiddenLogo.offsetHeight;
 
-      const randomX = Math.floor(Math.random() * (windowWidth - textWidth));
-      const randomY = Math.floor(Math.random() * (windowHeight - textHeight));
+      const randomX = Math.floor(Math.random() * (windowWidth - logoWidth));
+      const randomY = Math.floor(Math.random() * (windowHeight - logoHeight));
 
-      hiddenText.style.left = `${randomX}px`;
-      hiddenText.style.top = `${randomY}px`;
+      hiddenLogo.style.left = `${randomX}px`;
+      hiddenLogo.style.top = `${randomY}px`;
     };
 
     // Move torch with mouse
@@ -84,28 +81,28 @@
       torch.style.left = `${e.pageX}px`;
       torch.style.top = `${e.pageY}px`;
 
-      // Check if mouse is near hidden text
-      const textRect = hiddenText.getBoundingClientRect();
+      // Check if mouse is near hidden logo
+      const logoRect = hiddenLogo.getBoundingClientRect();
       const mouseX = e.clientX;
       const mouseY = e.clientY;
 
       if (
-        mouseX > textRect.left - 50 &&
-        mouseX < textRect.right + 50 &&
-        mouseY > textRect.top - 50 &&
-        mouseY < textRect.bottom + 50
+        mouseX > logoRect.left - 100 && /* Larger detection area */
+        mouseX < logoRect.right + 100 && /* Larger detection area */
+        mouseY > logoRect.top - 100 && /* Larger detection area */
+        mouseY < logoRect.bottom + 100 /* Larger detection area */
       ) {
-        hiddenText.style.opacity = '1';
+        hiddenLogo.style.opacity = '1';
       } else {
-        hiddenText.style.opacity = '0';
+        hiddenLogo.style.opacity = '0';
       }
     });
 
-    // Randomize text position on load
-    window.addEventListener('load', randomizeTextPosition);
+    // Randomize logo position on load
+    window.addEventListener('load', randomizeLogoPosition);
 
     // Redirect on click
-    hiddenText.addEventListener('click', () => {
+    hiddenLogo.addEventListener('click', () => {
       window.location.href = 'https://example.com'; // Replace with your link
     });
   </script>
