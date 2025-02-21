@@ -24,29 +24,34 @@
       height: 200px;
       background: radial-gradient(
         circle,
-        rgba(255, 255, 255, 0.1) 10%,
+        rgba(255, 255, 255, 0.2) 10%,
         rgba(0, 0, 0, 0.9) 70%
       );
       border-radius: 50%;
       pointer-events: none;
       transform: translate(-50%, -50%);
       z-index: 1000;
+      box-shadow: 0 0 50px 20px rgba(255, 255, 255, 0.2);
     }
 
     /* Hidden Text */
     .hidden-text {
       position: absolute;
-      font-size: 1.5rem;
+      font-size: 3rem; /* Bigger text */
+      font-family: 'Cinzel', serif; /* Custom font */
       color: #fff;
       opacity: 0;
       transition: opacity 0.3s ease;
       cursor: pointer;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Glow effect */
     }
 
     .hidden-text:hover {
       opacity: 1 !important;
     }
   </style>
+  <!-- Google Fonts for Custom Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <!-- Torch Effect -->
