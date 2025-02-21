@@ -13,142 +13,95 @@
       line-height: 1.6;
       color: #fff;
       background-color: #000;
-      overflow-x: hidden;
+      overflow: hidden;
+      cursor: none;
     }
 
-    h1, h2, h3 {
-      margin: 0;
-      padding: 0;
-    }
-
-    a {
-      text-decoration: none;
-      color: #fff;
-    }
-
-    /* Monochrome to Chromatic Effect */
-    .monochrome {
-      filter: grayscale(100%);
-      transition: filter 0.5s ease;
-    }
-
-    .monochrome:hover {
-      filter: grayscale(0%);
-    }
-
-    /* Hero Section */
-    .hero {
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      background: url('https://via.placeholder.com/1500x800') no-repeat center center/cover;
-      filter: grayscale(100%);
-      transition: filter 0.5s ease;
-    }
-
-    .hero:hover {
-      filter: grayscale(0%);
-    }
-
-    .hero h1 {
-      font-size: 4rem;
-      font-weight: bold;
-      color: #fff;
-      cursor: pointer;
-      transition: color 0.5s ease;
-    }
-
-    .hero h1:hover {
-      color: #ff6347; /* Vibrant orange */
-    }
-
-    /* Hidden Navigation */
-    .hidden-nav {
-      position: fixed;
-      top: 50%;
-      left: 50%;
+    /* Torch Effect */
+    .torch {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.1) 10%,
+        rgba(0, 0, 0, 0.9) 70%
+      );
+      border-radius: 50%;
+      pointer-events: none;
       transform: translate(-50%, -50%);
       z-index: 1000;
-      opacity: 0;
-      transition: opacity 0.5s ease;
     }
 
-    .hidden-nav a {
-      display: block;
-      margin: 20px 0;
+    /* Hidden Text */
+    .hidden-text {
+      position: absolute;
       font-size: 1.5rem;
       color: #fff;
-      opacity: 0.5;
-      transition: opacity 0.5s ease, color 0.5s ease;
-    }
-
-    .hidden-nav a:hover {
-      opacity: 1;
-      color: #ff6347; /* Vibrant orange */
-    }
-
-    /* Reveal on Hover */
-    .reveal {
       opacity: 0;
-      transition: opacity 0.5s ease;
+      transition: opacity 0.3s ease;
+      cursor: pointer;
     }
 
-    .reveal:hover {
-      opacity: 1;
-    }
-
-    /* Footer */
-    footer {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      text-align: center;
-      opacity: 0.5;
-      transition: opacity 0.5s ease;
-    }
-
-    footer:hover {
-      opacity: 1;
-    }
-
-    footer p {
-      margin: 0;
-      font-size: 0.9rem;
+    .hidden-text:hover {
+      opacity: 1 !important;
     }
   </style>
 </head>
 <body>
-  <!-- Hero Section -->
-  <section class="hero monochrome">
-    <h1>PIGPEN</h1>
-  </section>
+  <!-- Torch Effect -->
+  <div class="torch" id="torch"></div>
 
-  <!-- Hidden Navigation -->
-  <div class="hidden-nav reveal">
-    <a href="#">Enter</a>
-    <a href="#">Explore</a>
-    <a href="#">Discover</a>
-  </div>
-
-  <!-- Footer -->
-  <footer class="monochrome">
-    <p>What lies beyond the dust?</p>
-  </footer>
+  <!-- Hidden Text -->
+  <div class="hidden-text" id="hidden-text">Enter the Pen</div>
 
   <script>
-    // JavaScript to reveal hidden navigation on hover
-    const hero = document.querySelector('.hero');
-    const hiddenNav = document.querySelector('.hidden-nav');
+    // Get elements
+    const torch = document.getElementById('torch');
+    const hiddenText = document.getElementById('hidden-text');
 
-    hero.addEventListener('mouseenter', () => {
-      hiddenNav.style.opacity = '1';
+    // Randomize hidden text position
+    const randomizeTextPosition = () => {
+      const windowWidth = window.innerWidth;
+      const windowHeight = window.innerHeight;
+      const textWidth = hiddenText.offsetWidth;
+      const textHeight = hiddenText.offsetHeight;
+
+      const randomX = Math.floor(Math.random() * (windowWidth - textWidth));
+      const randomY = Math.floor(Math.random() * (windowHeight - textHeight));
+
+      hiddenText.style.left = `${randomX}px`;
+      hiddenText.style.top = `${randomY}px`;
+    };
+
+    // Move torch with mouse
+    document.addEventListener('mousemove', (e) => {
+      torch.style.left = `${e.pageX}px`;
+      torch.style.top = `${e.pageY}px`;
+
+      // Check if mouse is near hidden text
+      const textRect = hiddenText.getBoundingClientRect();
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+
+      if (
+        mouseX > textRect.left - 50 &&
+        mouseX < textRect.right + 50 &&
+        mouseY > textRect.top - 50 &&
+        mouseY < textRect.bottom + 50
+      ) {
+        hiddenText.style.opacity = '1';
+      } else {
+        hiddenText.style.opacity = '0';
+      }
     });
 
-    hero.addEventListener('mouseleave', () => {
-      hiddenNav.style.opacity = '0';
+    // Randomize text position on load
+    window.addEventListener('load', randomizeTextPosition);
+
+    // Redirect on click
+    hiddenText.addEventListener('click', () => {
+      window.location.href = 'https://example.com'; // Replace with your link
     });
   </script>
 </body>
